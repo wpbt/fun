@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Project from Bharat Thapa</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <canvas id="space"></canvas>
+
+    <header>
+        <nav class="primary-nav">
+            <ul class="navigation">
+                <li id="js">JS</li>
+                <li id="dom">DOM</li>
+                <li id="projects">Projects</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="js">
+            <h1>JavaScript</h1>
+            <section class="content">
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Introduction (JavaScript & EcmaScript)</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>JavaScript is a programming language used to build interactive and dynamic websites. It works
+                            alongside HTML and CSS to control a webpage's behavior, such as:</p>
+                        <ul>
+                            <li>Showing or hiding elements</li>
+                            <li>Validating form inputs</li>
+                            <li>Fetching data from servers</li>
+                            <li>Creating animations</li>
+                            <li>Handling user events like clicks or keystrokes</li>
+                        </ul>
+                        <p>JavaScript code is executed directly in the web browser, making it a client-side language.
+                            However, with environments like Node.js, JavaScript can also run on servers (server-side).
+                        </p>
+                        <p>Key Uses of JavaScript:</p>
+                        <ul>
+                            <li>Web interactivity: Slideshows, modals, dropdowns, etc.</li>
+                            <li>Single Page Applications (SPAs): Using frameworks like React, Vue, or Angular.</li>
+                            <li>Server-side development: With Node.js (e.g., building APIs).</li>
+                            <li>Mobile & Desktop Apps: Using tools like React Native or Electron.</li>
+                            <li>Game Development: Lightweight browser games using canvas and WebGL.</li>
+                        </ul>
+
+                        <h3>What is ECMAScript (ES)?</h3>
+                        <p>ECMAScript (ES) is the standard specification for JavaScript, defined by ECMA International.
+                            JavaScript is an implementation of this specification. ECMAScript defines:</p>
+                        <ul>
+                            <li>Syntax rules</li>
+                            <li>Core features (like variables, functions, classes, modules)</li>
+                            <li>New updates (ES6, ES7, ES2020, etc.)</li>
+                            <li>For example: let, const, arrow functions (()=>{}), template strings (`Hello ${name}`),
+                                and class syntax were introduced in ES6 (2015).</li>
+                        </ul>
+
+                        <p>Example:</p>
+                        <pre>
+                            <code>
+                                // example of onClick event handling (in a button)
+                                &lt;button onclick="greet()"&gt;Click Me&lt;/button&gt;
+
+                                &lt;script&gt;
+                                    function greet() {
+                                        alert('Hello, world!');
+                                    }
+                                &lt;/script&gt;
+                            </code>
+                        </pre>
+                        <span>When the user clicks the button, the JavaScript greet() function runs and shows an
+                            alert.</span>
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Creating Variables in JS</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>A variable in JavaScript is used to store data that you can reuse or modify later.</p>
+
+                        <h3>Declaring Variables</h3>
+                        <p>You can declare variables using:</p>
+                        <ul>
+                            <li>var (old, mostly avoided now)</li>
+                            <li>let (modern, block-scoped). Use it if you need to re-assign the value later.</li>
+                            <li>const (modern, block-scoped and constant). Use it if the value doesn't need to re-assign
+                                later.</li>
+                        </ul>
+
+                        <h3>Best practice for variables</h3>
+
+                        <ul>
+                            <li>Give meaningful names to variables</li>
+                            <li>Don't start names with [0-9]</li>
+                            <li>Don't use reserved keywords. Example: this, for, if, class, …</li>
+                            <li>Allowed keys: [aA-zZ], [0-9], and _ (underscore)</li>
+                            <li>Variable names are case sensitive so make sure you name them properly and use proper
+                                identifier.</li>
+                            <li>Best practice is to declare one variable per line.</li>
+                        </ul>
+
+                        <h3>Types:</h3>
+                        <p>Value Types:</p>
+                        <ul>
+                            <li>string</li>
+                            <li>number</li>
+                            <li>boolean</li>
+                            <li>undefined</li>
+                            <li>null</li>
+                        </ul>
+                        <p>Referece Types:</p>
+                        <ul>
+                            <li>objects</li>
+                            <li>arrays</li>
+                        </ul>
+
+                        <h3>Statically typed Vs. Dynamically typed:</h3>
+                        <ul>
+                            <li>Statically typed language need to declare variables along with their types</li>
+                            <li>Dynamically typed language can change their variable type during run time.</li>
+                        </ul>
+
+                        <h3>Variable scope:</h3>
+                        <ul>
+                            <li>var: function scoped</li>
+                            <li>let/const: block scoped (conditional block, loop block, function)</li>
+                        </ul>
+
+                        <h3>typeof Operator</h3>
+                        <p>Use typeof to check the type of a variable.</p>
+
+                        <h3>Hoisting:</h3>
+                        <p>Variables and functions are moved to the top of their scope before code execution (JS moves
+                            declarations to the top).</p>
+                        <p>Function expressions are not hoisted with value</p>
+
+                        <h3>Closures</h3>
+                        <p>A closure formed is when a function remembers the variables from its outer scope, even after
+                            that scope has closed.</p>
+                        <p>Closures Are Used In: Data privacy (like private variables), Factory functions, Event
+                            handlers, setTimeout, setInterval, React hooks (especially useState and useEffect)</p>
+
+                        <p>Example:</p>
+                        <pre>
+                            <code>
+                                // Hoisting example.
+                                sayHello();  // ❌ TypeError: sayHello is not a function
+                                // sayHello is a function expression.
+                                var sayHello = function() {
+                                    console.log("Hello");
+                                };
+
+                                // closure example:
+                                function outer() {
+                                    let count = 0;
+
+                                    return function inner() {
+                                        count++;
+                                        console.log(count);
+                                    };
+                                }
+
+                                const counter = outer();
+                                counter(); // 1
+                                counter(); // 2
+                                counter(); // 3
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Operators in JS</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>An operator is a symbol used to perform operations on variables and values — like arithmetic,
+                            comparison, logic, etc.</p>
+
+                        <h3>Arithmetic Operators</h3>
+                        <p>Used for basic math</p>
+                        <ul>
+                            <li>+ (addition)</li>
+                            <li>- (substraction)</li>
+                            <li>* (multiplication)</li>
+                            <li>/ (division): 5 / 2 = 2.5</li>
+                            <li>% (modulus): 5 % 2 = 1</li>
+                            <li>** (exponentiation): 2 ** 3 = 8</li>
+                            <li>++ (increment)</li>
+                            <li>-- (decrement)</li>
+                        </ul>
+
+                        <h3>Assignment Operators</h3>
+                        <p>Assign values to variables</p>
+                        <ul>
+                            <li>=</li>
+                            <li>+=</li>
+                            <li>-=</li>
+                            <li>*=</li>
+                            <li>/=</li>
+                            <li>%=</li>
+                            <li>**=</li>
+                        </ul>
+
+                        <h3>Comparison Operators:</h3>
+                        <p>Return true or false.</p>
+                        <ul>
+                            <li>== (equal loose)</li>
+                            <li>=== (equal strict)</li>
+                            <li>!= (not equal)</li>
+                            <li>!==</li>
+                            <li>>, <,>=, <= </li>
+                        </ul>
+
+                        <h3>Logical Operators:</h3>
+                        <p>Used to combine conditions.</p>
+                        <ul>
+                            <li>&& (AND)</li>
+                            <li>|| (OR)</li>
+                        </ul>
+
+                        <h3>Type Operators</h3>
+                        <ul>
+                            <li>typeof</li>
+                            <li>instanceof</li>
+                        </ul>
+
+                        <h3>String Operators:</h3>
+                        <ul>
+                            <li>+ : let fullName = firstName + ' ' + 'lastName;</li>
+                        </ul>
+
+                        <h3>Ternary Operator (? :)</h3>
+                        <p>let result = condition ? true_value : default_or_false_value;</p>
+
+                        <h3>Nullish Coalescing Operator (??)</h3>
+                        <p>Returns the right-hand value if the left-hand is null or undefined.</p>
+
+                        <p>let name = null ?? "Guest"; // "Guest" </p>
+                        <p>let count = 0 ?? 10; // 0 ✅ (not null)</p>
+
+                        <h3>Optional Chaining (?.)</h3>
+                        <p>Safely access nested properties without errors.</p>
+
+                        <h3>Spread (...) and Rest (...) Operators</h3>
+                        <p>let arr1 = [1, 2]; </p>
+                        <p>let arr2 = [...arr1, 3]; // [1, 2, 3];</p>
+
+                        <pre>
+                            function sum(...nums) {
+                                return nums.reduce((a, b) => a + b);
+                            }
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Control Flow in JS</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>Control Flow is the order in which code is executed in a program. JavaScript runs code from
+                            top to bottom, unless you change the flow using conditions, loops, or jumps.</p>
+
+                        <h3>Conditional Statements</h3>
+                        <p>Used to execute different blocks of code based on conditions.</p>
+                        <ul>
+                            <li>if</li>
+                            <li>else if</li>
+                            <li>else</li>
+                            <li>switch</li>
+                        </ul>
+
+                        <h3>Loops</h3>
+
+                        <ul>
+                            <li>for</li>
+                            <li>while</li>
+                            <li>do...while</li>
+                        </ul>
+
+                        <h3>Loop Control: break and continue:</h3>
+                        <ul>
+                            <li>break → exits the loop early</li>
+                            <li>continue → skips current iteration</li>
+                        </ul>
+
+                        <h3>Early Return in Functions:</h3>
+                        <p>Exit early to avoid unnecessary logic.</p>
+
+
+                        <h3>&& and || trick</h3>
+                        <ul>
+                            <li>&&: execute only if the condition matches. Example: condition &&
+                                execute_this_block_or_func</li>
+                            <li>||: execute default block or func if the condition isn't met. Example: condition ||
+                                default_call_or_val</li>
+                        </ul>
+
+                        <p>Example:</p>
+                        <pre>
+                            <code>
+                                let isLoggedIn = true;
+                                isLoggedIn && console.log("Welcome!"); // shortcut for if
+
+                                let userName = null;
+                                let displayName = userName || "Guest"; // fallback value
+
+                                let age = 18;
+                                let status = (age >= 18) ? "Adult" : "Minor";
+                            </code>
+                        </pre>
+
+                        <span>Note: in loops, make sure to set a proper condition to exit. Otherwise, infinite loop can
+                            happen.</span>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <div id="dom">
+            <h1>DOM Stuffs</h1>
+            <section>
+                <p>DOM Stuffs will go here.</p>
+            </section>
+        </div>
+
+        <div id="projects">
+            <h1>Project Stuffs</h1>
+            <section>
+                <p>Project Stuffs will go here.</p>
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>All Rights Reserved.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="descriptionModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-scroll-content" id="modalBody"></div>
+        </div>
+    </div>
+    <script src="js/scripts.js" async></script>
+</body>
+
+</html>
