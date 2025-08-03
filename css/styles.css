@@ -43,8 +43,9 @@ main * {
 
 footer {
     background: yellow;
-    padding: 10px;
+    padding: 10px 16px;
     border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 /* Modal */
