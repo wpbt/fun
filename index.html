@@ -1271,10 +1271,8 @@
                             <li>Private fields (#field) can only be accessed via get/set</li>
                         </ul>
 
-                        <h3>Prototype in JS</h3>
+                        <h3>Prototype</h3>
                         <ul>
-                            <li>Every object in JavaScript has a property called constructor that references the
-                                function used to create it.</li>
                             <li>Every JavaScript object has a hidden property called [[Prototype]], which is a reference
                                 to another object.</li>
                             <li>This is how JS does inheritance. No classical classes, no copy-paste of methods — just
@@ -1309,6 +1307,31 @@
                             console.log(obj.__proto__);               // Object.prototype
                             console.log(obj.__proto__.__proto__);     // null (end of chain)
                         </code></pre>
+
+                        <h3>Constructor Property</h3>
+                        <ul>
+                            <li>The constructor property of an object points to the function that created it.</li>
+                            <li>Class-based syntax automatically sets .constructor correctly. You don’t have to manually
+                                set it (unless you override prototype manually)</li>
+                        </ul>
+
+                        <pre><code>
+                            function Person(name) {
+                                this.name = name;
+                            }
+
+                            const p = new Person("Bharat");
+                            console.log(p.constructor); // 👉 Person
+
+                            p.__proto__ === Person.prototype // true
+                            Person.prototype.constructor === Person // true
+                        </code></pre>
+
+                        <h3>constructor vs prototype</h3>
+                        <ul>
+                            <li>.prototype: Functions only (Blueprint for instances (shared methods))</li>
+                            <li>.constructor: Objects & prototypes (Points back to the function that created i)</li>
+                        </ul>
                     </div>
                 </div>
 
