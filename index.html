@@ -64,6 +64,7 @@
                         </ul>
 
                         <p>Example:</p>
+
                         <pre>
                             <code>
                                 // example of onClick event handling (in a button)
@@ -76,6 +77,7 @@
                                 &lt;/script&gt;
                             </code>
                         </pre>
+
                         <span>When the user clicks the button, the JavaScript greet() function runs and shows an
                             alert.</span>
                     </div>
@@ -83,7 +85,7 @@
 
                 <div class="topic-wrapper">
                     <div class="topic-heading">
-                        <h2>Creating Variables in JS</h2>
+                        <h2>Creating Variables</h2>
                     </div>
                     <div class="topic-description" style="display: none;">
                         <p>A variable in JavaScript is used to store data that you can reuse or modify later.</p>
@@ -181,7 +183,7 @@
 
                 <div class="topic-wrapper">
                     <div class="topic-heading">
-                        <h2>Operators in JS</h2>
+                        <h2>Operators</h2>
                     </div>
                     <div class="topic-description" style="display: none;">
                         <p>An operator is a symbol used to perform operations on variables and values — like arithmetic,
@@ -266,7 +268,7 @@
 
                 <div class="topic-wrapper">
                     <div class="topic-heading">
-                        <h2>Control Flow in JS</h2>
+                        <h2>Control Flow (Loops and Conditionals)</h2>
                     </div>
                     <div class="topic-description" style="display: none;">
                         <p>Control Flow is the order in which code is executed in a program. JavaScript runs code from
@@ -323,6 +325,608 @@
 
                         <span>Note: in loops, make sure to set a proper condition to exit. Otherwise, infinite loop can
                             happen.</span>
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Arrow Function</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>Arrow functions (=>) are a shorter way to write functions in JavaScript introduced in ES6
+                            (2015).
+                            But they're not just shorter — they behave differently, especially with keyword <span
+                                style='font-style: italic; font-weight: bold;'>this</span>.</p>
+
+                        <pre>
+                            <code>
+                                // basic function!
+                                function greet(name) {
+                                   return "Hello " + name;
+                                }
+
+                                // arrow function.
+                                const greet = (name) => {
+                                    return "Hello " + name;
+                                };
+
+                                // or even shorter.
+                                const greet = name => "Hellow " + name;
+
+                                // multiple parameters.
+                                const add = (a, b) => a + b;
+
+                                // no parameters
+                                const sayHi = () => "Hi!";
+
+                                // Multiline Function Body
+                                const multiply = (a, b) => {
+                                    const result = a * b;
+                                    return result;
+                                };
+                            </code>
+                        </pre>
+
+                        <h3>Some Information:</h3>
+                        <ul>
+                            <li>If there's only one parameter, you can omit parentheses.</li>
+                            <li>If there's only one expression (function body), you can omit {} and return.</li>
+                            <li>Always use () if you have 0 or more than 1 parameter.</li>
+                            <li>In a block body ({}), you MUST use return explicitly.</li>
+                        </ul>
+
+                        <h3>Important: this Binding Difference</h3>
+
+                        <ul>
+                            <li>Arrow functions do NOT have their own this.</li>
+                            <li>They inherit this from the surrounding scope (called lexical this)</li>
+                        </ul>
+
+                        <pre>
+                            <code>
+                                // regular 'this'
+                                const person = {
+                                    name: "Bharat",
+                                    greet: function() {
+                                        console.log("Hi, I'm " + this.name); // ✅ this = person
+                                    }
+                                };
+
+                                // arrow 'this' (won't work)
+                                const person = {
+                                    name: "Bharat",
+                                    greet: () => {
+                                        console.log("Hi, I'm " + this.name); // ❌ this = undefined / window
+                                    }
+                                };
+
+                                // correct use of 'this': notice we wrapped in regular function (where 'this' refers to object).
+                                const person = {
+                                    name: "Bharat",
+                                    greet: function() {
+                                        setTimeout(() => {
+                                            console.log("Hi " + this.name); // ✅ this = person
+                                        }, 1000);
+                                    }
+                                };
+                            </code>
+                        </pre>
+
+                        <h3>Common Use Cases of Arrow Functions:</h3>
+                        <ul>
+                            <li>Callbacks</li>
+                            <li>In .map(), .filter(), .reduce()</li>
+                        </ul>
+
+                        <h3>Where NOT to Use Arrow Functions:</h3>
+                        <ul>
+                            <li>Object methods: this will be wrong</li>
+                            <li>Constructors (new): Arrow funcs can’t be used as constructors</li>
+                            <li>Prototype methods: Same issue with as object methods.</li>
+                            <li>Event listeners (sometimes): You may need correct this (e.g., DOM element)</li>
+                        </ul>
+
+                        <h3>Use Case Tips</h3>
+                        <ul>
+                            <li>Inside methods: use regular functions</li>
+                            <li>Inside setTimeout, setInterval: use arrow if you want this from parent</li>
+                            <li>Implicit return of object literals → wrap in ()</li>
+                        </ul>
+                        <pre>
+                            <code>
+                                const user = {
+                                    name: "Ram",
+                                    greet() {
+                                        console.log(this.name); // ✅ works
+                                    }
+                                };
+
+                                setTimeout(() => {
+                                    console.log(this); // parent context
+                                }, 1000);
+
+                                // if you need to return an object from an one liner arrow function, user ().
+                                const getUser = () => ({ name: "Bharat", age: 30 });
+
+                            </code>
+                        </pre>
+
+                        <p>Note: "Lexical" means "defined by position in the source code".</p>
+
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Destructuring</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>Destructuring is a syntax in JavaScript that lets you unpack values from arrays or properties
+                            from objects into separate variables — in one line.</p>
+
+                        <h3>Array Destructuring</h3>
+                        <pre>
+                            <code>
+                                const numbers = [10, 20, 30];
+                                const [a, b, c] = numbers;
+
+                                console.log(a); // 10
+                                console.log(b); // 20
+
+                                // Skipping Items
+                                const [first, , third] = [1, 2, 3];
+                                console.log(first); // 1
+                                console.log(third); // 3
+
+                                // Swapping Values
+                                let x = 1, y = 2;
+                                [x, y] = [y, x];
+                                console.log(x, y); // 2, 1
+
+                                // With Rest Operator
+                                const [head, ...rest] = [1, 2, 3, 4];
+                                console.log(head); // 1
+                                console.log(rest); // [2, 3, 4]
+                            </code>
+                        </pre>
+
+                        <h3>Object Destructuring:</h3>
+
+                        <pre>
+                            <code>
+                                const user = { name: "Bharat", age: 25 };
+                                const { name, age } = user;
+
+                                console.log(name); // "Bharat"
+                                console.log(age);  // 25
+
+                                // Renaming Variables
+                                const { name: fullName, age: years } = user;
+                                console.log(fullName); // "Bharat"
+
+                                // Default Values
+                                const { country = "Nepal" } = user;
+                                console.log(country); // "Nepal"
+
+                                // Nested Destructuring
+                                const user = {
+                                    name: "Ram",
+                                    address: {
+                                        city: "Kathmandu",
+                                        zip: 44600
+                                    }
+                                };
+                                const { address: { city, zip } } = user;
+                                console.log(city); // "Kathmandu"
+
+                                // Destructuring in Function Parameters (React Component props)
+                                function greet({ name, age }) {
+                                    console.log(`Hello ${name}, age ${age}`);
+                                }
+                                const person = { name: "Hari", age: 30 };
+                                greet(person); // Hello Hari, age 30
+
+                                // Destructuring in Loops
+                                const users = [
+                                    { id: 1, name: "Bharat" },
+                                    { id: 2, name: "Thapa" }
+                                ];
+
+                                for (const { id, name } of users) {
+                                    console.log(`${id}: ${name}`);
+                                }
+                            </code>
+                        </pre>
+
+                        <h3>Tips:</h3>
+                        <ul>
+                            <li>object destructuring is based on property names, not position so order doesn't matter.
+                            </li>
+                            <li>Variable names must match property names (unless you rename) (for object destructuring)
+                            </li>
+                            <li>Arrays are ordered collections, so destructuring array is based on index position.</li>
+                            <li>You can skip values using commas (in array destructuring)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>'this' Keyword</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>In JavaScript, <span style="font-weight: bold; font-style: italic;">this</span> is a keyword
+                            that refers to the object that is executing the current function.</p>
+                        <p>Its value depends on how and where the function is called, not just where it's written.</p>
+
+                        <h3>Notes:</h3>
+                        <ul>
+                            <li>Value of 'this' in Global scope:</li>
+                            <ul>
+                                <li>strict mode: undefined</li>
+                                <li>non strict mode: window (in browser) and global in node env.</li>
+                            </ul>
+                            <li>Inside object's method 'this' refers to the object.</li>
+                            <li>if you call 'this' from normal function, 'this' refers to global object (window or
+                                global)</li>
+                            <li>'this' inside Event listener refers to the element that fired the event.</li>
+                            <li>When this is called inside methods that are not part of the object, it will reference
+                                the global object.</li>
+                        </ul>
+
+                        <pre>
+                            <code>
+                                // this in Global Scope
+                                console.log(this); // In browser: window
+
+                                // strict mode using 'use strict'
+                                "use strict";
+                                console.log(this); // undefined
+
+                                // this in Functions
+                                function show() {
+                                    console.log(this);
+                                }
+                                show(); // non-strict: window | strict: undefined
+
+                                // this Inside an Object Method
+                                const person = {
+                                    name: "Bharat",
+                                    greet() {
+                                        console.log(this.name);
+                                    }
+                                };
+
+                                person.greet(); // "Bharat" ✅ (this = person)
+
+                                // this with Arrow Functions
+                                const person = {
+                                    name: "Bharat",
+                                    greet: () => {
+                                        console.log(this.name);
+                                    }
+                                };
+
+                                person.greet(); // ❌ undefined (arrow function has no `this`)
+
+                                // 'this' called from methods that are not part of the object.
+                                const video = {
+                                    title: 'Video Title',
+                                    tags: [ 'a', 'b', 'c', 'd' ],
+                                    play: function(){
+                                        console.log( 'this inside play', this ); // will reference video!
+                                    },
+                                    showTags: function(){
+                                        this.tags.forEach( function( tag ){
+                                            // this will reference the global object in this case!
+                                            // if you use arrow function here, it will inherit the scope from parent method "showtags" and 'this' work correctly
+                                            console.log( 'this inside forEach method', this );
+                                        } );
+                                    }
+                                };
+
+                                // this in Constructor Functions
+                                function Person(name) {
+                                    this.name = name;
+                                    this.greet = function() {
+                                        console.log( 'hello ' + name );
+                                    };
+                                }
+                                const p = new Person("John");
+                                console.log(p.name); // "John" (this refers to the new object being created)
+                                p.greet(); // references Person
+
+                                const newFunction = p.greet;
+                                newFunction(); // this call is not part of the object now (i.e., like object.funcName() ) and 'this' won't refer to Person obj. It refers to global/window obj.
+
+                                // to fix above : option 1 is to use .bind()
+                                const newFunction = p.greet.bind(p);
+                                newFunction(); // hello John
+
+                                // option 2 is to use arrow function in Person constructor function.
+                                this.greet = () => console.log( 'hello ' + name);
+                                // now without even the .bind() call, newFunction() will work as expected.
+                                
+                                // this in Classes
+                                class Car {
+                                    constructor(name) {
+                                        this.name = name;
+                                    }
+
+                                    start() {
+                                        console.log(`${this.name} started`);
+                                    }
+                                }
+
+                                const c = new Car("Toyota");
+                                c.start(); // "Toyota started"
+                            </code>
+                        </pre>
+
+                        <h3>this with call(), apply(), and bind()</h3>
+                        <p>Used to manually control what 'this' refers to.</p>
+                        <ul>
+                            <li>call(): Calls the function immediately, and lets you pass arguments one-by-one.</li>
+                            <li>apply(): Like call(), but arguments are passed as an array.</li>
+                            <li>bind(): Returns a new function with this permanently set — but does NOT call it
+                                immediately.</li>
+                            <ul>
+                                <li>Once bound using bind(), this cannot be changed again using call or apply.</li>
+                            </ul>
+                        </ul>
+
+                        <pre>
+                            <code>
+                                // call() → immediately calls with custom this
+                                function greet() {
+                                    console.log(this.name);
+                                }
+                                greet.call({ name: "John" }); // "John"
+
+                                // apply() → like call() but with arguments as array
+                                greet.apply({ name: "Ram" }); // "Ram"
+
+                                // bind() → returns a new function with bound this
+                                const bound = greet.bind({ name: "Hari" });
+                                bound(); // "Hari"
+                            </code>
+                        </pre>
+
+                        <h3>'this' in DOM Event Handlers</h3>
+                        <pre>
+                            <code>
+                                document.querySelector("button").addEventListener("click", function () {
+                                    console.log(this); // ✅ the &lt;button&gt; element
+                                });
+
+                                // But with arrow function:
+                                document.querySelector("button").addEventListener("click", () => {
+                                    console.log(this); // ❌ not button, inherited from outer scope (usually window)
+                                });
+                            </code>
+                        </pre>
+
+                        <p>Note: Use arrow functions only when you want to preserve this</p>
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Objects</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>A JavaScript object is a collection of key-value pairs (properties + methods).</p>
+
+                        <h3>Creating Objects:</h3>
+                        <ul>
+                            <li>Object literal</li>
+                            <li>new Object()</li>
+                            <li>Factory function (returns obj structured from arguments)</li>
+                            <li>Constructor function (uses 'this' keyword)</li>
+                            <li>Class syntax</li>
+                        </ul>
+
+                        <pre>
+                            <code>
+                                // object example:
+                                const user = {
+                                    name: "Bharat",
+                                    age: 25,
+                                    greet() {
+                                        console.log(`Hello, ${this.name}`);
+                                    }
+                                };
+
+                                // Object literal
+                                const person = { name: "Ram", age: 30 };
+                                // Note: you can't use arrow function with 'this' to define a method inside an object literal.
+                                // like:
+                                // const person = { ..., someFunc: () => .. accessing 'this' here (fxn. body) is not correct., }; // 'this' won't refer to the object.
+                                // good:
+                                const person = {
+                                    name: 'John',
+                                    greet: function() {
+                                        console.log( 'hello ' + this.name );
+                                    }
+                                };
+                                // or:
+                                const person = {
+                                    name: 'John',
+                                    greet: () => console.log( 'hello ' + person.name ) // using this.name would be wrong!
+                                };
+
+                                // creating object using 'new' keyword
+                                const person = new Object();
+                                person.name = "Ram";
+
+                                // Factory function
+                                function createUser(name, age) {
+                                    return { name, age };
+                                }
+
+                                // Constructor function
+                                // first empty obj {} is created. value of 'this' is made to point to that object. Finally object is returned (implicitly).
+                                function Person(name) {
+                                    this.name = name;
+                                }
+                                const p = new Person("John");
+
+                                // class syntax
+                                class Car {
+                                    constructor(brand) {
+                                        this.brand = brand;
+                                    }
+                                }
+                            </code>
+                        </pre>
+
+                        <h3>Accessing Properties & Methods</h3>
+                        <ul>
+                            <li>Dot notation: user.name;</li>
+                            <li>Bracket notation: user["name"];</li>
+                            <ul>
+                                <li>can also access special keys: user["full-name"]</li>
+                                <li>can also access dynamic keys: user[keyName]</li>
+                            </ul>
+                            <li>Calling methods: objectName.funcName();</li>
+                            <li>Objects are Dynamic in Nature: We can add, delete, and update object properties and
+                                methods by default.
+                            </li>
+                            <li>Delete property: delete user.age;</li>
+                            <li>Check existence: 'in' keyword ('propertyName' in objectName) or
+                                objectName.hasOwnProperty('propName') syntax.</li>
+                            <li>Looping through objects: for .. in loop. </li>
+                            <li>Use Object.keys(), Object.values(), or Object.entries() for better control</li>
+                            <li>Object Utility Methods: .keys(obj), .values(), .entries(), .assign(), .freeze(),
+                                .seal(), .hasOwn()</li>
+                            <ul>
+                                <li>Object.keys(obj): Returns array of keys</li>
+                                <li>Object.values(obj): Returns array of values</li>
+                                <li>Object.entries(obj): Returns array of [key, value]</li>
+                                <li>Object.assign(target, src): Copies properties</li>
+                                <li>Object.freeze(obj): Makes object immutable</li>
+                                <li>Object.seal(obj): Prevents adding/removing properties</li>
+                                <li>Object.hasOwn(obj, key): Safe key check</li>
+                            </ul>
+                        </ul>
+
+                        <pre>
+                            <code>                              
+                                // Check existence
+                                "name" in user;        // true
+                                user.hasOwnProperty("name"); // true                                
+
+                                // looping obj.
+                                for (let key in user) {
+                                    console.log(key, user[key]);
+                                }
+
+                                Object.keys(user);    // ['name', 'city']
+                                Object.values(user);  // ['Bharat', 'Kathmandu']
+                                Object.entries(user); // [['name', 'Bharat'], ['city', 'Kathmandu']]
+
+                                // dynamic key
+                                const key = "city";
+                                const user = {
+                                    [key]: "Lalitpur"
+                                };
+                            </code>
+                        </pre>
+
+                        <h3>Constructor Property and Prototype</h3>
+                        <p>Every object in JavaScript has a property called constructor that references the function
+                            used to create that object.</p>
+
+                        <p>All objects in JS inherit from a hidden object called [[Prototype]] (accessed via __proto__
+                            or Object.getPrototypeOf()).</p>
+
+                        <p>When it (constructor property) tries to determine the function, first it looks for a custom
+                            constructor (as in constructor function for creating objects) and if there is no custom
+                            constructor function used then, it will return the native (built-in) function used to create
+                            that object.</p>
+                        <pre>
+                            <code>
+                                const obj = {}; // constructor: Object()
+                                const str =  'string val'; // constructor: String()
+                                const num = 123; // constructor: Number()
+                                …
+
+                                const obj = {};
+                                console.log(obj.constructor); // ƒ Object() {...}
+
+                                const arr = [];
+                                console.log(arr.constructor); // ƒ Array() {...}
+
+                                // So, the .constructor tells you: "What function was used to create this object?"
+
+                                const obj = {};
+                                console.log(obj.__proto__ === Object.prototype); // true
+
+                                // Custom Constructor
+                                function Person(name) {
+                                    this.name = name;
+                                }
+
+                                const p = new Person("Bharat");
+                                console.log(p.constructor); // ƒ Person(name) {...}
+                                // The object p was created using Person(), so its .constructor points to Person.
+
+                                // Recreate Objects
+                                function clone(obj) {
+                                    return new obj.constructor();
+                                }
+
+                                const date = new Date();
+                                const newDate = clone(date);
+
+                                // Restore Constructor after Prototype Override
+                                // correct approach:
+                                Person.prototype = {
+                                    constructor: Person,
+                                    greet() {
+                                        console.log("Hi");
+                                    }
+                                };
+
+                                // incorrect approach:
+                                function Person() {}
+                                Person.prototype = {
+                                    greet() {
+                                        console.log("Hi");
+                                    }
+                                };
+
+                                const p = new Person();
+                                console.log(p.constructor); // ❌ Object (not Person)
+                            </code>
+                        </pre>
+
+                    </div>
+                </div>
+
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Functions</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <p>A function is a reusable block of code designed to perform a particular task.</p>
+
+                        <h3>Notes:</h3>
+                        <ul>
+                            <li>Functions are Hoisted — can be called before definition.</li>
+                            <li>Function expressions are Not hoisted — only usable after definition.</li>
+                            <li>Without return, function returns undefined</li>
+                            <li>Functions create local scope.</li>
+                            <li>Recursion: A function that calls itself.</li>
+                            <li>First-Class Functions: JS Functions are first class. Meaning they can be:</li>
+                            <ul>
+                                <li>assigned to variables,</li>
+                                <li>passed as arguments,</li>
+                                <li>returned from other functions.</li>
+                            </ul>
+                            <li>Higher-Order Functions: A function that takes another function as an argument or returns
+                                a function. Example: map, filter, forEach, setTimeout</li>
+                        </ul>
                     </div>
                 </div>
 
