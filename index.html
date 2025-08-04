@@ -17,7 +17,7 @@
             <ul class="navigation">
                 <li id="js">JS</li>
                 <li id="dom">DOM</li>
-                <li id="projects">Projects</li>
+                <li id="projects">Others</li>
             </ul>
         </nav>
     </header>
@@ -1347,8 +1347,85 @@
 
         <div id="projects">
             <h1>Project Stuffs</h1>
-            <section>
-                <p>Project Stuffs will go here.</p>
+            <section class="content">
+                <div class="topic-wrapper">
+                    <div class="topic-heading">
+                        <h2>Creating a jQuery Plugin</h2>
+                    </div>
+                    <div class="topic-description" style="display: none;">
+                        <h3>What is a jQuery plugin</h3>
+
+                        <p>A jQuery plugin is a way to encapsulate reusable logic or UI behavior and attach it to any
+                            jQuery element.
+                            It extends jQuery's prototype so you can do things like: .hide(), .fadeOut(), .animate(), ..
+                            or any other thing you would like to do with a HTML element.</p>
+
+                        <h4>Use Cases:</h4>
+                        <ul>
+                            <li>Custom sliders</li>
+                            <li>Form validation</li>
+                            <li>Tooltips / modals</li>
+                            <li>Animations / interactions</li>
+                        </ul>
+
+                        <h3>A jQuery Plugin should:</h3>
+                        <ul>
+                            <li>behaves like a jQuery method: element.yourPluginName();</li>
+                            <li>support options: element.yourPluginName(options);</li>
+                            <li>be chainable. user should be able to perform other operations after adding your plugin
+                                functionality ( element.yourPluginName().method1().method2()...; ).</li>
+                            <li>be scoped: meaning it should work with multiple elements.</li>
+                            <li>encapsulate logic privately</li>
+                        </ul>
+
+                        <pre><code>
+                            // Note: you should have access to jQuery at this point.
+                            // basic example:
+                            (function($) {
+                                $.fn.pluginMethod = function( options ) {
+                                    let defaultOptions = {};
+                                    let settings = $.extend(defaultOptions, options);
+                                };
+
+                                // perform operation with the passed element: $('element').yourPluginName(options);
+                                // make sure to return the processed element so that the plugin supports chaining.
+                                // 'this' referes to the passed element in this scope.
+
+                                let output = this.each(function() {
+                                    ...
+                                }); // it can be anything based on the plugin!
+
+                                return output;
+                            })(jQuery);
+                        </code></pre>
+
+                        <h3>Notes:</h3>
+                        <ul>
+                            <li>$.extends(): will help you to merge user options with default options</li>
+                            <li>make sure to validate user input options so that your plugin behaves as expected.</li>
+                            <li>$.fn (jQuery object): this object contains all jQuery methods (.css(), .addClass(),
+                                ...). and if we want to write our own methods, it will need to contain those as well.
+                            </li>
+                            <li>If your plugin works with multiple html elements, best option to loop through those
+                                collection is the use of .each() method.</li>
+                        </ul>
+
+                        <pre><code>
+                            (function($) {
+                                $.fn.myNewPlugin = function() {
+    
+                                    return this.each(function() {
+                                        // Do something to each element here.
+                                    });
+                                
+                                };
+                            }) (jQuery);
+                        </code></pre>
+
+                        <p>Learn more at: <a href="https://learn.jquery.com/plugins/basic-plugin-creation/"
+                                target="_blank">Creating a jQuery Plugin</a></p>
+                    </div>
+                </div>
             </section>
         </div>
 
